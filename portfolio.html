@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ignacio Bianchi — Data & Automation Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg2: #111113;
+      --bg3: #18181b;
+      --border: #27272a;
+      --border2: #3f3f46;
+      --text: #fafafa;
+      --text2: #a1a1aa;
+      --text3: #71717a;
+      --accent: #4ade80;
+      --accent2: #22c55e;
+      --accent-dim: rgba(74,222,128,0.08);
+      --accent-dim2: rgba(74,222,128,0.15);
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(10,10,11,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text2);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      letter-spacing: 0.04em;
+      background: var(--bg2);
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .tag.accent {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0b;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover { background: var(--accent2); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text2);
+      color: var(--text);
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: var(--border2); }
+
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.4;
+    }
+
+    /* ── PROJECTS ── */
+    #projects {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border2);
+      background: var(--bg3);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      max-width: 680px;
+    }
+
+    .project-impact {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(74,222,128,0.2);
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--border2);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .project-group {
+      margin-bottom: 3rem;
+    }
+
+    .project-group:last-child { margin-bottom: 0; }
+
+    .project-group-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-group-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      white-space: nowrap;
+    }
+
+    .project-group-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .project-group-supply .project-card::before { background: var(--accent); }
+    .project-group-recruiting .project-card::before { background: #60a5fa; }
+    .project-group-recruiting .project-impact { color: #60a5fa; background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.2); }
+
+    /* ── SKILLS ── */
+    #skills {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .skill-list li {
+      font-size: 13px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 300;
+    }
+
+    .skill-list li::before {
+      content: '›';
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:first-child { padding-top: 0; }
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      padding-top: 4px;
+    }
+
+    .exp-role {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .exp-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-text h2 {
+      margin-bottom: 1rem;
+    }
+
+    .contact-text p {
+      color: var(--text2);
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .contact-link-icon {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      width: 24px;
+      text-align: center;
+    }
+
+    .contact-link-label {
+      font-weight: 300;
+      color: var(--text2);
+      font-size: 13px;
+    }
+
+    .contact-availability {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+
+    .avail-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .avail-status {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .avail-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .avail-desc {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .avail-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .avail-role {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .avail-role::before {
+      content: '→';
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .project-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">ib.dev</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-eyebrow">Data & Automation Engineer</div>
+      <h1>
+        Ignacio<br>
+        <em>Bianchi</em>
+      </h1>
+      <p class="hero-sub">
+        I build automation systems and data pipelines that operations teams rely on daily —
+        from supply chain platforms to AI-powered document processing workflows.
+      </p>
+      <div class="hero-stack">
+        <span class="tag accent">PostgreSQL</span>
+        <span class="tag accent">n8n</span>
+        <span class="tag accent">Retool</span>
+        <span class="tag accent">Claude API</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">ShipHero</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Slack API</span>
+        <span class="tag">Gmail API</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-outline" href="#contact">Get in Touch</a>
+        <a class="btn btn-outline" href="https://linkedin.com/in/ignacioab15" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">About</div>
+        <h2>I turn operational chaos<br>into systems that just work.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text fade-up">
+          <p>
+            My core work is end-to-end pipeline design — from <strong>PostgreSQL schema modeling and SQL optimization</strong> to webhook-driven automations, LLM-powered document processing, and production app development with Retool.
+          </p>
+          <p>
+            I specialize in supply chain and e-commerce operations, where messy requirements, fragmented data, and manual workarounds are the norm — and where the right automation actually moves the needle.
+          </p>
+          <p>
+            Completed 3.5 years of Chemical Engineering at UTN, giving me a strong quantitative foundation in process modeling, statistics, and data analysis.
+          </p>
+          <p>
+            Based in Rosario, Argentina. Fluent in <strong>Spanish</strong>, <strong>English (C2)</strong>, and <strong>Italian (B2)</strong>.
+          </p>
+        </div>
+        <div class="about-stats fade-up">
+          <div class="stat-card">
+            <div class="stat-num">62%</div>
+            <div class="stat-label">Query performance improvement via indexing & refactoring</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">$583K+</div>
+            <div class="stat-label">Inventory visibility gap solved via Vendor Portal</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">20 min</div>
+            <div class="stat-label">Manual task → zero-touch pipeline (freight invoice processor)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Production modules shipped in the Order Tool platform</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Projects</div>
+        <h2>Built in production.<br>Used daily.</h2>
+      </div>
+
+      <!-- SUPPLY CHAIN & OPERATIONS -->
+      <div class="project-group project-group-supply">
+        <div class="project-group-label fade-up">
+          <span class="project-group-title">Supply Chain & Operations</span>
+          <div class="project-group-line"></div>
+        </div>
+        <div class="projects-grid">
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-name">Order Tool — Supply Chain Platform</div>
+            <div class="project-impact">↑ Full lifecycle coverage · 10+ modules in production</div>
+            <p class="project-desc">
+              A 10+ page multi-module Retool application built from scratch, covering the full supply chain order lifecycle: PO management, inbound receiving, FIFO inventory allocation, transfer orders, vendor billing, payment reconciliation, and operations alerting. Integrates with ShipHero API for real-time warehouse sync.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Retool</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">ShipHero API</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="project-num">01</div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-name">AI Freight Invoice Processor</div>
+            <div class="project-impact">↓ 20-min manual task → zero-touch pipeline</div>
+            <p class="project-desc">
+              An agentic n8n pipeline that accepts freight invoice PDFs via webhook, sends them to Claude API for structured LLM extraction of cost line items, formats the output into a structured CSV, and delivers directly to a Slack ops-alerts channel — fully eliminating manual data entry.
+            </p>
+            <div class="project-tags">
+              <span class="tag">n8n</span>
+              <span class="tag">Claude API</span>
+              <span class="tag">Slack API</span>
+              <span class="tag">Webhook</span>
+              <span class="tag">PDF parsing</span>
+            </div>
+          </div>
+          <div class="project-num">02</div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-name">Vendor Collaborative Portal</div>
+            <div class="project-impact">↑ $583K+ inventory now fully visible to finance</div>
+            <p class="project-desc">
+              Identified a critical gap: $583K+ in shipped inventory with no reliable ETA on vendor billing. Built a self-service Retool portal giving vendors direct access to their outstanding POs — vendors can update shipment statuses, confirm ex-factory dates, and convert approved POs into bills with a single click, replacing a manual email-heavy process and giving finance real-time cash flow forecasting.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Retool</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Email automation</span>
+            </div>
+          </div>
+          <div class="project-num">03</div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div>
+            <div class="project-name">Payment Sync Automation</div>
+            <div class="project-impact">↓ Manual reconciliation step fully eliminated</div>
+            <p class="project-desc">
+              Webhook-driven n8n automation that receives Ramp payment events, routes them through 17-node conditional logic, matches to internal POs and bills in PostgreSQL, updates payment statuses, and dispatches confirmation emails via Gmail API — fully replacing a manual reconciliation workflow.
+            </p>
+            <div class="project-tags">
+              <span class="tag">n8n</span>
+              <span class="tag">Ramp API</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Gmail API</span>
+              <span class="tag">Webhook</span>
+            </div>
+          </div>
+          <div class="project-num">04</div>
+        </div>
+
+          <div class="project-card fade-up">
+            <div>
+              <div class="project-name">Live Funnel Data — Shopify ETL</div>
+              <div class="project-impact">↑ Hourly campaign visibility via GraphQL pipeline</div>
+              <p class="project-desc">
+                Scheduled n8n ETL pipeline that hits Shopify's GraphQL API hourly with full pagination logic, extracts funnel and campaign performance data across all pages, and syncs it downstream for real-time marketing analytics — replacing manual exports with a live data feed.
+              </p>
+              <div class="project-tags">
+                <span class="tag">n8n</span>
+                <span class="tag">Shopify GraphQL</span>
+                <span class="tag">ETL</span>
+                <span class="tag">Pagination</span>
+              </div>
+            </div>
+            <div class="project-num">05</div>
+          </div>
+
+          <div class="project-card fade-up">
+            <div>
+              <div class="project-name">Operations Alert System</div>
+              <div class="project-impact">↑ Daily ops visibility across 5 alert categories</div>
+              <p class="project-desc">
+                Scheduled n8n monitoring workflow that runs 5 parallel SQL queries against the operations database daily — detecting overdue POs, late shipments, missing landed cost quotes, wrong ex-factory dates, and overdue transfer orders — and delivers a consolidated digest to a Slack channel.
+              </p>
+              <div class="project-tags">
+                <span class="tag">n8n</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Slack API</span>
+                <span class="tag">SQL</span>
+              </div>
+            </div>
+            <div class="project-num">06</div>
+          </div>
+
+      </div><!-- end supply grid -->
+      </div><!-- end supply group -->
+
+      <!-- RECRUITING & PEOPLE OPS -->
+      <div class="project-group project-group-recruiting">
+        <div class="project-group-label fade-up">
+          <span class="project-group-title">Recruiting & People Ops</span>
+          <div class="project-group-line"></div>
+        </div>
+        <div class="projects-grid">
+
+          <div class="project-card fade-up">
+            <div>
+              <div class="project-name">Outreach Processor + Email Automation</div>
+              <div class="project-impact">↑ LinkedIn applicants → personalized outreach in one click</div>
+              <p class="project-desc">
+                A two-part system: a React app that ingests LinkedIn Easy Apply XLSX exports, cross-deduplicates candidates, filters by application date and pipeline stage, and checks against existing Supabase records — then fires a webhook to an n8n pipeline that bulk-upserts candidates, routes by role, and dispatches personalized outreach emails via Gmail. Handles 4 concurrent job roles.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">n8n</span>
+                <span class="tag">Supabase</span>
+                <span class="tag">Gmail API</span>
+                <span class="tag">Webhook</span>
+                <span class="tag">XLSX parsing</span>
+              </div>
+            </div>
+            <div class="project-num">07</div>
+          </div>
+
+          <div class="project-card fade-up">
+            <div>
+              <div class="project-name">10-Minute Challenge Automated Reminder</div>
+              <div class="project-impact">↑ Zero manual follow-up on assessment pipeline</div>
+              <p class="project-desc">
+                Weekly scheduled n8n automation that queries Airtable across multiple active job roles, identifies candidates who opted out of the cognitive assessment but haven't completed it within the past 7 days, and sends targeted reminder emails — keeping the hiring pipeline moving without manual intervention.
+              </p>
+              <div class="project-tags">
+                <span class="tag">n8n</span>
+                <span class="tag">Airtable</span>
+                <span class="tag">Gmail API</span>
+                <span class="tag">Scheduled automation</span>
+              </div>
+            </div>
+            <div class="project-num">08</div>
+          </div>
+
+        </div><!-- end recruiting grid -->
+      </div><!-- end recruiting group -->
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Skills & Stack</div>
+        <h2>Full-pipeline coverage.</h2>
+      </div>
+      <div class="skills-grid fade-up">
+        <div class="skill-group">
+          <div class="skill-group-title">Data & Databases</div>
+          <ul class="skill-list">
+            <li>PostgreSQL / Supabase (advanced)</li>
+            <li>Google BigQuery</li>
+            <li>SQL optimization & schema design</li>
+            <li>FIFO logic & data modeling</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Automation & ETL</div>
+          <ul class="skill-list">
+            <li>n8n (advanced)</li>
+            <li>Zapier / Zoho Flow</li>
+            <li>Webhook pipelines</li>
+            <li>REST API integration</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">App Development</div>
+          <ul class="skill-list">
+            <li>Retool (advanced)</li>
+            <li>JavaScript (proficient)</li>
+            <li>Python (intermediate)</li>
+            <li>Google Apps Script</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">AI / LLM</div>
+          <ul class="skill-list">
+            <li>Claude API / OpenRouter</li>
+            <li>LLM document parsing</li>
+            <li>Prompt engineering</li>
+            <li>Agentic workflow design</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Analytics & BI</div>
+          <ul class="skill-list">
+            <li>Tableau (intermediate)</li>
+            <li>Zoho Analytics</li>
+            <li>Excel (advanced)</li>
+            <li>Data storytelling</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Integrations</div>
+          <ul class="skill-list">
+            <li>ShipHero API</li>
+            <li>Ramp API</li>
+            <li>Slack API</li>
+            <li>Gmail API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-label">Experience</div>
+        <h2>Where the work happened.</h2>
+      </div>
+      <div class="exp-list">
+        <div class="exp-item fade-up">
+          <div class="exp-date">Sep 2025 –<br>Present</div>
+          <div>
+            <div class="exp-role">Developer & Automation Engineer</div>
+            <div class="exp-company">Uproot Clean</div>
+            <div class="exp-desc">
+              Built and maintain a production-grade supply chain platform covering the full order lifecycle. Designed FIFO allocation engine, AI-powered document processing workflows, vendor portal, payment automation, and ops alerting systems — all in active daily use.
+            </div>
+          </div>
+        </div>
+        <div class="exp-item fade-up">
+          <div class="exp-date">Jan 2025 –<br>May 2025</div>
+          <div>
+            <div class="exp-role">Business Analyst Intern</div>
+            <div class="exp-company">Clear Summit Group</div>
+            <div class="exp-desc">
+              Automated CRM and reporting pipelines using Zapier and Zoho Flow (30% manual workload reduction). Led process mapping and translated business requirements into technical specifications for analytics modules.
+            </div>
+          </div>
+        </div>
+        <div class="exp-item fade-up">
+          <div class="exp-date">Aug 2022 –<br>Jan 2025</div>
+          <div>
+            <div class="exp-role">Mathematics Tutor</div>
+            <div class="exp-company">Tutor.com</div>
+            <div class="exp-desc">
+              Delivered remote instructional sessions in Algebra, Probability & Statistics, and Finite Mathematics. Built strong habits around clear communication and structured problem-solving across diverse learners.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text fade-up">
+          <div class="section-label">Contact</div>
+          <h2>Let's build<br>something reliable.</h2>
+          <p>
+            Open to Automation Engineer, AI Workflow Engineer, and Integrations roles — remote or hybrid.
+            If you're dealing with operational chaos that needs a system, I'm interested.
+          </p>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:ignacio.ab15@gmail.com">
+              <span class="contact-link-icon">@</span>
+              <div>
+                <div>ignacio.ab15@gmail.com</div>
+                <div class="contact-link-label">Email</div>
+              </div>
+            </a>
+            <a class="contact-link" href="https://linkedin.com/in/ignacioab15" target="_blank">
+              <span class="contact-link-icon">in</span>
+              <div>
+                <div>linkedin.com/in/ignacioab15</div>
+                <div class="contact-link-label">LinkedIn</div>
+              </div>
+            </a>
+            <a class="contact-link" href="https://wa.me/5493415155892" target="_blank">
+              <span class="contact-link-icon">✆</span>
+              <div>
+                <div>+54 341 515 5892</div>
+                <div class="contact-link-label">WhatsApp · Rosario, Argentina</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-availability fade-up">
+          <div class="avail-status"><span class="avail-dot"></span>Available for new opportunities</div>
+          <div class="avail-title">Looking for roles where automation creates real operational leverage.</div>
+          <div class="avail-desc">
+            Comfortable working in fast-moving environments where requirements are still evolving and clean systems don't yet exist.
+          </div>
+          <div class="avail-roles">
+            <div class="avail-role">Automation / Integrations Engineer</div>
+            <div class="avail-role">AI Workflow Engineer</div>
+            <div class="avail-role">Process & Operations Analyst</div>
+            <div class="avail-role">Remote or hybrid · Open to relocation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Ignacio Bianchi</p>
+    <p>Rosario, Argentina · ignacio.ab15@gmail.com</p>
+  </footer>
+
+  <script>
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
